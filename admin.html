@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel Admin</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/vistas.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginView" class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-4">
+      <h3 class="text-center">Login</h3>
+      <form onsubmit="login(event)">
+        <div class="mb-3">
+          <label>Usuario</label>
+          <input type="text" id="usuario" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label>Contraseña</label>
+          <input type="password" id="password" class="form-control" required>
+        </div>
+        <button class="btn btn-primary w-100">Ingresar</button>
+      </form>
+      <p id="errorLogin" class="text-danger mt-2"></p>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL -->
+<div id="panelView" class="d-none">
+  <div class="d-flex">
+
+    <!-- Sidebar -->
+    <div class="text-white p-3 vh-100" style="width: 250px;">
+      <h4>Pollería Admin</h4>
+      <hr>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <button class="nav-link text-white" onclick="cambiarVista('dashboard')">Dashboard</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link text-white" onclick="cambiarVista('venta')">Punto de Venta</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link text-white" onclick="cambiarVista('inventario')">Inventario</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link text-white" onclick="cambiarVista('finanzas')">Finanzas</button>
+        </li>      
+        <li class="nav-item">
+          <button class="nav-link text-white" onclick="cambiarVista('caja')">Caja</button>
+        </li>
+        <li class="nav-item mt-3">
+          <button class="btn w-100" onclick="logout()">Salir</button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="p-4 flex-grow-1" id="contenido">
+      <h2>Bienvenido</h2>
+      <p>Selecciona una opción del menú</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal fade" id="modalConfirmar" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p id="mensajeEliminar"></p>
+        <input type="hidden" id="indexEliminar">
+        <input type="hidden" id="tipoEliminar">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-danger" onclick="confirmarEliminar()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="js/caja.js"></script>
+<script src="js/inventario.js"></script>
+<script src="js/finanzas.js"></script>
+<script src="js/venta.js"></script>
+<script src="js/dashboard.js"></script>
+
+<script>
+/* ================= LOGIN ================= */
+
+function login(e) {
+  e.preventDefault();
+
+  const user = document.getElementById("usuario").value;
+  const pass = document.getElementById("password").value;
+
+  // Usuario simple (puedes cambiarlo)
+  if (user === "admin" && pass === "1234") {
+    localStorage.setItem("auth", "true");
+
+    document.getElementById("loginView").classList.add("d-none");
+    document.getElementById("panelView").classList.remove("d-none");
+
+    cambiarVista("dashboard");
+  } else {
+    document.getElementById("errorLogin").textContent = "Credenciales incorrectas";
+  }
+}
+
+function logout() {
+  localStorage.removeItem("auth");
+  location.reload();
+}
+
+/* ================= VISTAS ================= */
+
+function cambiarVista(vista) {
+  fetch(`vistas/${vista}.html`)
+    .then(res => {
+      if (!res.ok) throw new Error("No se pudo cargar la vista");
+      return res.text();
+    })
+    .then(data => {
+      document.getElementById("contenido").innerHTML = data;
+
+      const acciones = {
+        dashboard: typeof cargarDashboard !== "undefined" ? cargarDashboard : null,
+        venta: typeof cargarProductos !== "undefined" ? cargarProductos : null,
+        inventario: typeof cargarInventario !== "undefined" ? cargarInventario : null,
+        finanzas: typeof cargarFinanzas !== "undefined" ? cargarFinanzas : null,
+        caja: typeof cargarCaja !== "undefined" ? cargarCaja : null
+      };
+
+      if (acciones[vista]) acciones[vista]();
+    })
+    .catch(err => {
+      document.getElementById("contenido").innerHTML =
+        `<p class="text-danger">${err.message}</p>`;
+    });
+}
+
+/* ================= ELIMINAR ================= */
+
+function confirmarEliminar() {
+  const index = parseInt(document.querySelector("#indexEliminar").value);
+  const tipo = document.querySelector("#tipoEliminar").value;
+
+  if (tipo === "inventario") {
+    inventario.splice(index, 1);
+    actualizarInventario();
+  } else if (tipo === "caja") {
+    movimientos.splice(index, 1);
+    actualizarCaja();
+  } else if (tipo === "finanzas") {
+    gastos.splice(index, 1);
+    actualizarGastos();
+    guardarGastos();
+  }
+
+  let modal = document.querySelector("#modalConfirmar");
+  let bsModal = bootstrap.Modal.getInstance(modal);
+
+  if (!bsModal) {
+    bsModal = new bootstrap.Modal(modal);
+  }
+
+  bsModal.hide();
+}
+
+/* ================= AUTO LOGIN ================= */
+
+window.onload = () => {
+  if (localStorage.getItem("auth") === "true") {
+    document.getElementById("loginView").classList.add("d-none");
+    document.getElementById("panelView").classList.remove("d-none");
+    cambiarVista("dashboard");
+  }
+};
+</script>
+
+</body>
+</html>

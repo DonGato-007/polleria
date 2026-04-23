@@ -1,0 +1,52 @@
+<h2>💸 Módulo de Gastos</h2>
+
+<div class="row mb-3">
+  <div class="col-md-4">
+    <div class="card text-white text-center p-3">
+      <small>Total Gastos</small>
+      <h3>S/ <span id="totalGastos">0</span></h3>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <input type="text" id="buscarGasto" class="form-control" placeholder="Buscar..." onkeyup="filtrarGastos()">
+  </div>
+  <div class="col-md-3">
+    <input type="date" id="filtroFecha" class="form-control" onchange="filtrarGastos()">
+  </div>
+  <div class="col-md-3">
+    <button class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#modalGasto">+ Nuevo Gasto</button>
+  </div>
+</div>
+
+<div class="row g-3" id="listaGastos"></div>
+
+<!-- Modal Gasto -->
+<div class="modal fade" id="modalGasto" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tituloModalGasto">Nuevo Gasto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="indexEditar">
+        
+        <label>Descripción:</label>
+        <input type="text" id="descripcionGasto" class="form-control mb-2" placeholder="Descripción del gasto">
+
+        <label>Monto (S/):</label>
+        <input type="number" id="montoGasto" class="form-control mb-2" placeholder="0.00">
+
+        <label>Fecha:</label>
+        <input type="date" id="fechaGasto" class="form-control mb-2">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" onclick="agregarGasto()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
