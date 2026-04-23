@@ -38,11 +38,14 @@ body {
   background: linear-gradient(135deg, var(--negro) 0%, var(--negro-medio) 100%);
 }
 
-#loginView .col-md-4 {
+#loginView .login-form-container {
   background: var(--blanco);
   border-radius: 14px;
-  padding: 7.5rem 9rem;
+  height: auto;
+  padding: 2.5rem 2rem;
   box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  max-width: 400px;
+  width: 100%;
 }
 
 #loginView h3 {
@@ -60,7 +63,8 @@ body {
 #loginView .form-control {
   border: 1.5px solid var(--gris-borde);
   border-radius: 8px;
-  padding: 0.65rem 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
   transition: border-color 0.2s;
 }
 
