@@ -22,8 +22,8 @@
 
     /* Light mode variables */
     :root.light-mode {
-      --bg:       #f5f5f5;
-      --bg2:      #ffffff;
+      --bg:       #fff5e6;
+      --bg2:      #fffaf0;
       --card-bg:  #ffffff;
       --accent:   #e85c00;
       --accent2:  #ffb300;
@@ -87,28 +87,92 @@
       box-shadow: 0 4px 12px rgba(232,92,0,.4);
     }
     :root.light-mode nav {
-      background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
-      box-shadow: 0 2px 10px rgba(0,0,0,.1);
+      background: linear-gradient(135deg, #fff9f0 0%, #ffe8cc 50%, #ffd699 100%);
+      box-shadow: 0 4px 20px rgba(232,92,0,.15);
+      border-bottom: 2px solid var(--accent2);
     }
     :root.light-mode .top-bar {
-      background: #ffb300;
+      background: linear-gradient(135deg, #ffb300 0%, #ffc933 100%);
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
     }
     :root.light-mode .section-dark {
-      background: #fafafa;
+      background: #fffaf0;
     }
     :root.light-mode footer {
-      background: #f5f5f5;
+      background: #fff9f0;
       border-top: 3px solid var(--accent);
     }
     :root.light-mode .mobile-nav {
       background: #ffffff;
     }
     :root.light-mode .cart-modal {
-      background: #f5f5f5;
+      background: #fff5e6;
     }
     :root.light-mode .cart-header {
       background: #ffffff;
       border-bottom: 2px solid var(--accent);
+    }
+    :root.light-mode .cart-header h2 {
+      color: #1a1a1a;
+    }
+    :root.light-mode .cart-close {
+      color: #1a1a1a;
+      background: rgba(0,0,0,.05);
+    }
+    :root.light-mode .cart-close:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+    :root.light-mode .cart-empty {
+      color: #666;
+    }
+    :root.light-mode .cart-empty i {
+      color: #999;
+    }
+    :root.light-mode .cart-item {
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    :root.light-mode .cart-item-name {
+      color: #1a1a1a;
+    }
+    :root.light-mode .cart-item-price {
+      color: var(--accent);
+    }
+    :root.light-mode .cart-qty {
+      color: #1a1a1a;
+    }
+    :root.light-mode .cart-qty-btn {
+      background: rgba(0,0,0,.08);
+      color: #1a1a1a;
+    }
+    :root.light-mode .cart-qty-btn:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+    :root.light-mode .cart-item-remove {
+      color: #666;
+    }
+    :root.light-mode .cart-item-remove:hover {
+      color: #ff006e;
+    }
+    :root.light-mode .cart-footer {
+      background: #ffffff;
+    }
+    :root.light-mode .cart-total-label {
+      color: #1a1a1a;
+    }
+    :root.light-mode .cart-total-amount {
+      color: var(--accent);
+    }
+    :root.light-mode .cart-clear {
+      color: #666;
+      border-color: #ddd;
+    }
+    :root.light-mode .cart-clear:hover {
+      background: rgba(255,0,110,.1);
+      color: #ff006e;
+      border-color: #ff006e;
     }
     :root.light-mode .beb-group {
       background: #ffffff;
@@ -119,6 +183,24 @@
     }
     :root.light-mode .section-heading h2 {
       color: #1a1a1a;
+    }
+    :root.light-mode .nav-links a {
+      color: #1a1a1a;
+    }
+    :root.light-mode .nav-links a:hover {
+      color: var(--accent);
+    }
+    :root.light-mode .logo-f,
+    :root.light-mode .logo-g,
+    :root.light-mode .logo-n {
+      color: #1a1a1a;
+      text-shadow: 2px 2px 4px rgba(0,0,0,.1);
+    }
+    :root.light-mode .logo-el {
+      color: #333;
+    }
+    :root.light-mode .logo-subtitle {
+      color: var(--accent);
     }
 
     a { text-decoration: none; color: inherit; }
@@ -149,6 +231,28 @@
     .top-bar .btns a {
       padding: .4rem 1rem; border-radius: 6px; font-size: .82rem; font-weight: 800;
       cursor: pointer; transition: .2s;
+    }
+    .btn-call-top { 
+      background: linear-gradient(135deg, #25d366, #1da851); 
+      color: #fff; 
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      box-shadow: 0 2px 8px rgba(37,211,102,.3);
+    }
+    .btn-call-top:hover { 
+      background: linear-gradient(135deg, #1da851, #25d366);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(37,211,102,.5);
+    }
+    .btn-call-top i {
+      animation: ring 2s ease-in-out infinite;
+    }
+    @keyframes ring {
+      0%, 100% { transform: rotate(0deg); }
+      10%, 30% { transform: rotate(-15deg); }
+      20%, 40% { transform: rotate(15deg); }
+      50% { transform: rotate(0deg); }
     }
     .btn-delivery { background: #111; color: #fff; }
     .btn-delivery:hover { background: var(--accent); }
@@ -268,6 +372,7 @@
     }
     .nav-links a:hover::before { width: 100%; }
     .nav-links a:hover { color: var(--accent2); transform: translateY(-2px); }
+    
     .nav-right { display: flex; align-items: center; gap: 1.2rem; }
     .cart-icon {
       position: relative;
@@ -373,6 +478,226 @@
       display: none;
     }
 
+    /* Login button */
+    .btn-login {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .6rem 1.3rem;
+      background: transparent;
+      border: 2px solid var(--accent2);
+      color: var(--white);
+      border-radius: 25px;
+      font-weight: 800;
+      font-size: .85rem;
+      cursor: pointer;
+      transition: all .3s;
+    }
+    .btn-login:hover {
+      background: var(--accent2);
+      color: #111;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(255,179,0,.4);
+    }
+    .btn-login i {
+      font-size: 1rem;
+    }
+
+    /* Login Modal */
+    .login-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.7);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .login-modal.show {
+      display: flex;
+      opacity: 1;
+    }
+    .login-modal-content {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      max-width: 420px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+      transform: scale(0.9);
+      transition: transform .3s;
+    }
+    .login-modal.show .login-modal-content {
+      transform: scale(1);
+    }
+    .login-modal-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .login-modal-header h2 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: .5rem;
+    }
+    .login-modal-header p {
+      color: var(--gray);
+      font-size: .9rem;
+    }
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .form-group label {
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .form-group input {
+      padding: .8rem 1rem;
+      background: rgba(255,255,255,.05);
+      border: 2px solid rgba(255,255,255,.1);
+      border-radius: 12px;
+      color: var(--white);
+      font-size: .9rem;
+      transition: all .3s;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--accent2);
+      background: rgba(255,255,255,.08);
+    }
+    .form-group input::placeholder {
+      color: var(--gray);
+    }
+    .btn-submit {
+      padding: .9rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-weight: 900;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all .3s;
+      margin-top: .5rem;
+    }
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(232,92,0,.4);
+    }
+    .login-divider {
+      text-align: center;
+      margin: 1.5rem 0;
+      color: var(--gray);
+      font-size: .85rem;
+      position: relative;
+    }
+    .login-divider::before,
+    .login-divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: rgba(255,255,255,.1);
+    }
+    .login-divider::before { left: 0; }
+    .login-divider::after { right: 0; }
+    .login-options {
+      display: flex;
+      gap: .8rem;
+    }
+    .btn-social {
+      flex: 1;
+      padding: .8rem;
+      border: 2px solid rgba(255,255,255,.1);
+      background: transparent;
+      border-radius: 12px;
+      color: var(--white);
+      font-weight: 700;
+      font-size: .85rem;
+      cursor: pointer;
+      transition: all .3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+    }
+    .btn-social:hover {
+      border-color: var(--accent2);
+      background: rgba(255,179,0,.1);
+    }
+    .btn-social i {
+      font-size: 1.1rem;
+    }
+    .login-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: .85rem;
+      color: var(--gray);
+    }
+    .login-footer a {
+      color: var(--accent2);
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .login-footer a:hover {
+      text-decoration: underline;
+    }
+    .btn-close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      border: none;
+      color: var(--white);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all .3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-close-modal:hover {
+      background: var(--accent);
+      transform: rotate(90deg);
+    }
+
+    /* Light mode login modal */
+    :root.light-mode .login-modal-content {
+      background: #ffffff;
+      box-shadow: 0 20px 60px rgba(0,0,0,.2);
+    }
+    :root.light-mode .form-group input {
+      background: #f5f5f5;
+      border-color: #e0e0e0;
+      color: #1a1a1a;
+    }
+    :root.light-mode .form-group input:focus {
+      background: #fff;
+      border-color: var(--accent2);
+    }
+    :root.light-mode .btn-social {
+      border-color: #e0e0e0;
+    }
+    :root.light-mode .btn-social:hover {
+      border-color: var(--accent2);
+      background: rgba(255,179,0,.1);
+    }
+
     /* ===== HERO SLIDER ===== */
     .hero {
       position: relative; width: 100%; height: 420px; overflow: hidden;
@@ -385,16 +710,16 @@
     }
     .slide.active { opacity: 1; }
     .slide-1 {
-      background: linear-gradient(135deg, rgba(139,0,0,0.85) 0%, rgba(204,68,0,0.85) 40%, rgba(26,0,16,0.9) 100%),
-                  url('https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=1200&q=80') center/cover;
+      background: linear-gradient(135deg, rgba(139,0,0,0.4) 0%, rgba(204,68,0,0.4) 40%, rgba(26,0,16,0.5) 100%),
+                  url('imagenes/Captura de pantalla 2026-04-25 111055.png') center/cover;
     }
     .slide-2 {
-      background: linear-gradient(135deg, rgba(26,0,16,0.85) 0%, rgba(58,0,32,0.85) 50%, rgba(139,0,0,0.9) 100%),
-                  url('https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=1200&q=80') center/cover;
+      background: linear-gradient(135deg, rgba(26,0,16,0.4) 0%, rgba(58,0,32,0.4) 50%, rgba(139,0,0,0.5) 100%),
+                  url('imagenes/Captura de pantalla 2026-04-25 111104.png') center/cover;
     }
     .slide-3 {
-      background: linear-gradient(135deg, rgba(42,0,16,0.85) 0%, rgba(204,68,0,0.85) 60%, rgba(26,0,8,0.9) 100%),
-                  url('https://images.unsplash.com/photo-1633964913295-ceb43826e36f?w=1200&q=80') center/cover;
+      background: linear-gradient(135deg, rgba(42,0,16,0.4) 0%, rgba(204,68,0,0.4) 60%, rgba(26,0,8,0.5) 100%),
+                  url('imagenes/Captura de pantalla 2026-04-25 111117.png') center/cover;
     }
     .slide-inner {
       max-width: 500px;
@@ -810,7 +1135,7 @@
       .logo-o { font-size: 1.5rem; }
       .logo-el { font-size: .75rem; }
       .logo-subtitle { font-size: .5rem; letter-spacing: .5px; }
-      .nav-center,.nav-right .btn-reservar { display: none; }
+      .nav-center,.nav-right .btn-reservar,.nav-right .btn-login { display: none; }
       .hamburger { display: flex; }
       .cart-icon { width: 38px; height: 38px; }
       .cart-icon i { font-size: 1.1rem; }
@@ -832,6 +1157,10 @@
       .banner-horarios h2 { font-size: 1.3rem; }
       .banner-horarios .hora { font-size: 1.2rem; }
       .banner-horarios .sub { font-size: .7rem; }
+      .login-modal-content {
+        max-width: 95%;
+        padding: 2rem 1.5rem;
+      }
     }
 
     /* ===== SECTION BG PATTERN ===== */
@@ -973,6 +1302,44 @@
   </div>
 </div>
 
+<!-- LOGIN MODAL -->
+<div class="login-modal" id="loginModal">
+  <div class="login-modal-content">
+    <button class="btn-close-modal" onclick="closeLoginModal()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="login-modal-header">
+      <h2>Bienvenido</h2>
+      <p>Ingresa a tu cuenta de El Fogón</p>
+    </div>
+    <form class="login-form" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" placeholder="tu@email.com" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn-submit">Iniciar Sesión</button>
+    </form>
+    <div class="login-divider">o continúa con</div>
+    <div class="login-options">
+      <button class="btn-social" onclick="loginWithGoogle()">
+        <i class="fa-brands fa-google"></i>
+        Google
+      </button>
+      <button class="btn-social" onclick="loginWithFacebook()">
+        <i class="fa-brands fa-facebook"></i>
+        Facebook
+      </button>
+    </div>
+    <div class="login-footer">
+      ¿No tienes cuenta? <a onclick="alert('Función de registro próximamente')">Regístrate aquí</a>
+    </div>
+  </div>
+</div>
+
 <!-- TOP BAR -->
 <div class="top-bar">
   <div class="top-bar-left">
@@ -980,6 +1347,9 @@
     <div class="info"><i class="fa-solid fa-map-marker-alt"></i> Av. Manuel Callo Zevallos 301, Sicuani</div>
   </div>
   <div class="btns">
+    <a href="tel:+51910795135" class="btn-call-top">
+      <i class="fa-solid fa-phone"></i> Llamar Ahora
+    </a>
     <a href="https://wa.me/51910795135?text=Hola+El+Fog%C3%B3n%2C+quiero+hacer+un+pedido+para+delivery+%F0%9F%9B%B5" target="_blank" class="btn-delivery">Delivery</a>
     <a href="https://wa.me/51910795135?text=Hola+El+Fog%C3%B3n%2C+quiero+hacer+un+pedido+para+recojo+en+local" target="_blank" class="btn-recojo">Recojo en local</a>
   </div>
@@ -1013,6 +1383,10 @@
       <span class="icon-sun">☀️</span>
       <span class="icon-moon">🌙</span>
     </div>
+    <button class="btn-login" onclick="openLoginModal()">
+      <i class="fa-solid fa-user"></i>
+      <span>Ingresar</span>
+    </button>
     <div class="cart-icon" onclick="openCart()">
       <i class="fa-solid fa-shopping-bag"></i>
       <span class="cart-badge" id="cartBadge">0</span>
@@ -1069,7 +1443,7 @@
     </div>
     <div class="novedades-grid">
       <!-- Card 1: Horarios -->
-      <div class="nov-card nov-card-1" style="background: linear-gradient(135deg, #c0001a 0%, #8b0000 100%);">
+      <div class="nov-card nov-card-1" style="background: linear-gradient(135deg, rgba(192,0,26,0.5) 0%, rgba(139,0,0,0.6) 100%), url('https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=800&q=80') center/cover;">
         <div class="banner-horarios" style="background: transparent;">
           <h2>HORARIOS <span>DE ATENCIÓN</span></h2>
           <p style="font-size:.75rem;color:rgba(255,255,255,.7);margin:.3rem 0">Abierto todos los días</p>
@@ -1084,28 +1458,28 @@
         </div>
       </div>
       <!-- Card 2: Combo destacado -->
-      <div class="nov-card nov-card-2" style="background: linear-gradient(135deg, #e85c00 0%, #cc4400 100%);">
+      <div class="nov-card nov-card-2" style="background: linear-gradient(135deg, rgba(232,92,0,0.6) 0%, rgba(204,68,0,0.65) 100%), url('https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800&q=80') center/cover;">
         <div style="position: absolute; inset: 0; background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem; text-align: center;">
-          <h2 style="font-size: 1.8rem; font-weight: 900; line-height: 1.1; color: #fff; margin-bottom: .4rem;">POLLO<br>ENTERO</h2>
-          <p style="font-size: .85rem; color: rgba(255,255,255,.9); margin-bottom: .8rem;">Papas fritas, ensalada,<br>aguadito y cremas</p>
-          <div style="font-size: 2.5rem; font-weight: 900; color: #fff;">S/ 86.00</div>
-          <a href="https://wa.me/51910795135?text=Quiero+pedir+1+pollo+a+la+brasa+entero" target="_blank" style="display:inline-block;background:#111;color:#fff;padding:.4rem 1rem;border-radius:8px;font-weight:800;font-size:.82rem;margin-top:.5rem;">Pedir ahora 🔥</a>
+          <h2 style="font-size: 1.8rem; font-weight: 900; line-height: 1.1; color: #fff; margin-bottom: .4rem; text-shadow: 2px 2px 8px rgba(0,0,0,.8);">POLLO<br>ENTERO</h2>
+          <p style="font-size: .85rem; color: rgba(255,255,255,.95); margin-bottom: .8rem; text-shadow: 1px 1px 4px rgba(0,0,0,.7);">Papas fritas, ensalada,<br>aguadito y cremas</p>
+          <div style="font-size: 2.5rem; font-weight: 900; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,.8);">S/ 86.00</div>
+          <a href="https://wa.me/51910795135?text=Quiero+pedir+1+pollo+a+la+brasa+entero" target="_blank" style="display:inline-block;background:#111;color:#fff;padding:.4rem 1rem;border-radius:8px;font-weight:800;font-size:.82rem;margin-top:.5rem;box-shadow:0 4px 12px rgba(0,0,0,.5);">Pedir ahora 🔥</a>
         </div>
       </div>
       <!-- Card 3: Promo -->
-      <div class="nov-card nov-card-3" style="background: linear-gradient(135deg, #8b0000 0%, #c0001a 100%);">
+      <div class="nov-card nov-card-3" style="background: linear-gradient(135deg, rgba(139,0,0,0.5) 0%, rgba(192,0,26,0.6) 100%), url('https://images.unsplash.com/photo-1633964913295-ceb43826e36f?w=800&q=80') center/cover;">
         <div class="banner-promo" style="background: transparent;">
-          <h3>PROMO<br><span>BROASTER</span></h3>
-          <p style="font-size:.75rem;color:rgba(255,255,255,.8);margin:.3rem 0">Broaster + bebida de cortesía</p>
-          <div style="font-size:1.4rem;font-weight:900;color:var(--accent2)">S/ 14.00</div>
+          <h3 style="text-shadow: 2px 2px 6px rgba(0,0,0,.8);">PROMO<br><span>BROASTER</span></h3>
+          <p style="font-size:.75rem;color:rgba(255,255,255,.9);margin:.3rem 0;text-shadow: 1px 1px 4px rgba(0,0,0,.7);">Broaster + bebida de cortesía</p>
+          <div style="font-size:1.4rem;font-weight:900;color:var(--accent2);text-shadow: 2px 2px 6px rgba(0,0,0,.8);">S/ 14.00</div>
         </div>
       </div>
       <!-- Card 4: Nuevo -->
-      <div class="nov-card nov-card-4" style="background: linear-gradient(135deg, #3a0020 0%, #8b0000 100%);">
+      <div class="nov-card nov-card-4" style="background: linear-gradient(135deg, rgba(58,0,32,0.5) 0%, rgba(139,0,0,0.6) 100%), url('https://images.unsplash.com/photo-1594221708779-94832f4320d1?w=800&q=80') center/cover;">
         <div class="banner-nuevo" style="background: transparent;">
-          <h3>NUEVO<br><span>SALCHIPOLLO</span></h3>
-          <p style="font-size:.75rem;color:rgba(255,255,255,.8);margin:.3rem 0">Pollo + salchicha + arroz chaufa</p>
-          <div style="font-size:1.2rem;font-weight:900;color:var(--accent2)">¡Pruébalo!</div>
+          <h3 style="text-shadow: 2px 2px 6px rgba(0,0,0,.8);">NUEVO<br><span>SALCHIPOLLO</span></h3>
+          <p style="font-size:.75rem;color:rgba(255,255,255,.9);margin:.3rem 0;text-shadow: 1px 1px 4px rgba(0,0,0,.7);">Pollo + salchicha + arroz chaufa</p>
+          <div style="font-size:1.2rem;font-weight:900;color:var(--accent2);text-shadow: 2px 2px 6px rgba(0,0,0,.8);">¡Pruébalo!</div>
         </div>
       </div>
     </div>
@@ -1208,7 +1582,7 @@
     <div class="dishes-grid">
       <!-- 1/8 -->
       <div class="dish-card">
-        <div class="dish-img">🍗</div>
+        <div class="dish-img"><img src="imagenes_donbelisario/cuarto-de-pollo_chaufa_gaseosa-DESKTOP-384X320.png" alt="1/8 Pollo a la Brasa"></div>
         <div class="dish-body">
           <div class="dish-name">1/8 Pollo a la Brasa</div>
           <div class="dish-desc">Acompañado de papas fritas, ensalada, aguadito ó chicha y todas las cremas</div>
@@ -1221,7 +1595,7 @@
       </div>
       <!-- 1/4 -->
       <div class="dish-card">
-        <div class="dish-img">🍗</div>
+        <div class="dish-img"><img src="imagenes_donbelisario/Banner_Desktop_Generico_Individual.png" alt="1/4 Pollo a la Brasa"></div>
         <div class="dish-body">
           <div class="dish-name">1/4 Pollo a la Brasa</div>
           <div class="dish-desc">Acompañado de papas fritas, ensalada, aguadito ó chicha y todas las cremas</div>
@@ -1234,7 +1608,7 @@
       </div>
       <!-- Medio -->
       <div class="dish-card">
-        <div class="dish-img">🍗</div>
+        <div class="dish-img"><img src="imagenes_donbelisario/Banner_Desktop_Generico_Para_2.png" alt="Medio Pollo a la Brasa"></div>
         <div class="dish-body">
           <div class="dish-name">Medio Pollo a la Brasa</div>
           <div class="dish-desc">Acompañado de papas fritas, ensalada, aguadito ó chicha y todas las cremas + gaseosa cortesía</div>
@@ -1247,7 +1621,7 @@
       </div>
       <!-- 1 Pollo -->
       <div class="dish-card">
-        <div class="dish-img">🍗</div>
+        <div class="dish-img"><img src="imagenes_donbelisario/Banner_Desktop_Generico_Familiar.png" alt="1 Pollo a la Brasa"></div>
         <div class="dish-body">
           <div class="dish-name">1 Pollo a la Brasa</div>
           <div class="dish-desc">Acompañado de papas fritas, ensalada, aguadito ó chicha y todas las cremas</div>
@@ -1271,7 +1645,7 @@
     </div>
     <div class="dishes-grid">
       <div class="dish-card">
-        <div class="dish-img">🍛</div>
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1603073163308-9c0f6f6b5841?w=400&q=80" alt="1/4 Pollo Mixto"></div>
         <div class="dish-body">
           <div class="dish-name">1/4 Pollo Mixto</div>
           <div class="dish-desc">Acompañado de papas fritas, arroz chaufa, ensalada, aguadito ó chicha y todas las cremas</div>
@@ -1283,7 +1657,7 @@
         </div>
       </div>
       <div class="dish-card">
-        <div class="dish-img">🌭</div>
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1619221882018-04f8f2bb5f5f?w=400&q=80" alt="Salchipollo"></div>
         <div class="dish-body">
           <div class="dish-name">Salchipollo</div>
           <div class="dish-desc">Acompañado de papas fritas, arroz chaufa, salchicha, ensalada y todas las cremas</div>
@@ -1307,7 +1681,7 @@
     </div>
     <div class="dishes-grid">
       <div class="dish-card">
-        <div class="dish-img">🍳</div>
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1562967914-608f82629710?w=400&q=80" alt="Broaster"></div>
         <div class="dish-body">
           <div class="dish-name">Broaster</div>
           <div class="dish-desc">Acompañado de papas fritas, ensalada y todas las cremas + bebida cortesía</div>
@@ -1319,7 +1693,7 @@
         </div>
       </div>
       <div class="dish-card">
-        <div class="dish-img">🍳</div>
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&q=80" alt="Broaster Mixto"></div>
         <div class="dish-body">
           <div class="dish-name">Broaster Mixto</div>
           <div class="dish-desc">Acompañado de papas fritas, arroz, ensalada y todas las cremas + bebida cortesía</div>
@@ -1343,7 +1717,7 @@
     </div>
     <div class="dishes-grid">
       <div class="dish-card">
-        <div class="dish-img">🌭</div>
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&q=80" alt="Salchipapa"></div>
         <div class="dish-body">
           <div class="dish-name">Salchipapa</div>
           <div class="dish-desc">Acompañado de papas fritas, salchicha y todas las cremas + bebida cortesía</div>
@@ -1367,7 +1741,7 @@
     </div>
     <div class="dishes-grid">
       <div class="dish-card">
-        <div class="dish-img">🍚</div>
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1603073163308-9c0f6f6b5841?w=400&q=80" alt="Arroz Chaufa"></div>
         <div class="dish-body">
           <div class="dish-name">Arroz Chaufa</div>
           <div class="dish-desc">Acompañado de arroz, trozos de pollo, salchicha y todas las cremas + bebida cortesía</div>
@@ -1391,7 +1765,7 @@
     </div>
     <div class="dishes-grid">
       <div class="dish-card">
-        <div class="dish-img">🍲</div>
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&q=80" alt="Caldo de Gallina"></div>
         <div class="dish-body">
           <div class="dish-name">Caldo de Gallina</div>
           <div class="dish-desc">Acompañado de su rocoto, limón y cebollita china</div>
@@ -1403,7 +1777,7 @@
         </div>
       </div>
       <div class="dish-card">
-        <div class="dish-img">🍜</div>
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&q=80" alt="Caldo de Pollo"></div>
         <div class="dish-body">
           <div class="dish-name">Caldo de Pollo</div>
           <div class="dish-desc">Acompañado de su rocoto, limón y cebollita china</div>
@@ -1415,7 +1789,7 @@
         </div>
       </div>
       <div class="dish-card">
-        <div class="dish-img">🥣</div>
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&q=80" alt="Aguadito Especial"></div>
         <div class="dish-body">
           <div class="dish-name">Aguadito Especial</div>
           <div class="dish-desc">Acompañado de su rocoto y limón</div>
@@ -1439,7 +1813,7 @@
     </div>
     <div class="dishes-grid">
       <div class="dish-card">
-        <div class="dish-img">🥩</div>
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1588347818036-8fc5e6418a9f?w=400&q=80" alt="Milanesa"></div>
         <div class="dish-body">
           <div class="dish-name">Milanesa</div>
           <div class="dish-desc">Acompañado de arroz, trozo de pollo, papitas fritas y todas las cremas + bebida cortesía</div>
@@ -1813,6 +2187,51 @@
       updateCartUI();
     }
   }
+
+  // Login Modal Functions
+  function openLoginModal() {
+    const modal = document.getElementById('loginModal');
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLoginModal() {
+    const modal = document.getElementById('loginModal');
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  function handleLogin(event) {
+    event.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+    // Aquí iría la lógica de autenticación real
+    console.log('Login attempt:', { email, password });
+    
+    // Simulación de login exitoso
+    alert('¡Bienvenido a El Fogón! 🍗\n\nFuncionalidad de login en desarrollo.');
+    closeLoginModal();
+    
+    // Limpiar formulario
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
+  }
+
+  function loginWithGoogle() {
+    alert('Login con Google próximamente 🔐');
+  }
+
+  function loginWithFacebook() {
+    alert('Login con Facebook próximamente 🔐');
+  }
+
+  // Cerrar modal al hacer clic fuera de él
+  document.getElementById('loginModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeLoginModal();
+    }
+  });
 
   function openCart() {
     document.getElementById('cartModal').classList.add('open');
