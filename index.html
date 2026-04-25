@@ -20,6 +20,19 @@
       --radius:   18px;
     }
 
+    /* Light mode variables */
+    :root.light-mode {
+      --bg:       #f5f5f5;
+      --bg2:      #ffffff;
+      --card-bg:  #ffffff;
+      --accent:   #e85c00;
+      --accent2:  #ffb300;
+      --red:      #c0001a;
+      --white:    #1a1a1a;
+      --gray:     #666;
+      --radius:   18px;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -27,6 +40,85 @@
       color: var(--white);
       font-family: 'Nunito', sans-serif;
       overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Light mode specific styles */
+    :root.light-mode body {
+      background: var(--bg);
+    }
+    :root.light-mode .card-bg,
+    :root.light-mode .dish-card,
+    :root.light-mode .cart-item,
+    :root.light-mode .beb-group {
+      box-shadow: 0 2px 10px rgba(0,0,0,.1);
+      border: 1px solid #e0e0e0;
+    }
+    :root.light-mode .dish-card {
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+      border: 1px solid #f0f0f0;
+    }
+    :root.light-mode .dish-card:hover {
+      box-shadow: 0 8px 30px rgba(232,92,0,.15);
+      border-color: var(--accent2);
+      transform: translateY(-8px);
+    }
+    :root.light-mode .dish-img {
+      background: linear-gradient(135deg, #fff5e6, #ffe6cc);
+    }
+    :root.light-mode .dish-name {
+      color: #1a1a1a;
+    }
+    :root.light-mode .dish-desc {
+      color: #666;
+    }
+    :root.light-mode .dish-price {
+      color: var(--accent);
+    }
+    :root.light-mode .btn-comprar {
+      background: var(--accent2);
+      color: #111;
+      box-shadow: 0 2px 8px rgba(255,179,0,.3);
+    }
+    :root.light-mode .btn-comprar:hover {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(232,92,0,.4);
+    }
+    :root.light-mode nav {
+      background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+      box-shadow: 0 2px 10px rgba(0,0,0,.1);
+    }
+    :root.light-mode .top-bar {
+      background: #ffb300;
+    }
+    :root.light-mode .section-dark {
+      background: #fafafa;
+    }
+    :root.light-mode footer {
+      background: #f5f5f5;
+      border-top: 3px solid var(--accent);
+    }
+    :root.light-mode .mobile-nav {
+      background: #ffffff;
+    }
+    :root.light-mode .cart-modal {
+      background: #f5f5f5;
+    }
+    :root.light-mode .cart-header {
+      background: #ffffff;
+      border-bottom: 2px solid var(--accent);
+    }
+    :root.light-mode .beb-group {
+      background: #ffffff;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    }
+    :root.light-mode .beb-group h4 {
+      color: var(--accent);
+    }
+    :root.light-mode .section-heading h2 {
+      color: #1a1a1a;
     }
 
     a { text-decoration: none; color: inherit; }
@@ -248,6 +340,38 @@
       border-radius: 2px; transition: .3s; 
     }
     .hamburger:hover span { background: linear-gradient(90deg, #ff006e, #ffb300); }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255,179,0,.2), rgba(232,92,0,.2));
+      border: 2px solid transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all .3s;
+      font-size: 1.2rem;
+    }
+    .theme-toggle:hover {
+      background: linear-gradient(135deg, rgba(255,179,0,.3), rgba(232,92,0,.3));
+      transform: scale(1.1) rotate(15deg);
+      border-color: var(--accent2);
+    }
+    .theme-toggle .icon-sun {
+      display: none;
+    }
+    .theme-toggle .icon-moon {
+      display: block;
+    }
+    :root.light-mode .theme-toggle .icon-sun {
+      display: block;
+    }
+    :root.light-mode .theme-toggle .icon-moon {
+      display: none;
+    }
 
     /* ===== HERO SLIDER ===== */
     .hero {
@@ -691,6 +815,7 @@
       .cart-icon { width: 38px; height: 38px; }
       .cart-icon i { font-size: 1.1rem; }
       .cart-badge { width: 18px; height: 18px; font-size: .65rem; }
+      .theme-toggle { width: 38px; height: 38px; font-size: 1rem; }
       .hero { height: 320px; }
       .slide-inner h1 { font-size: 1.6rem; }
       .footer-grid { grid-template-columns: 1fr; }
@@ -884,6 +1009,10 @@
     </ul>
   </div>
   <div class="nav-right">
+    <div class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
+      <span class="icon-sun">☀️</span>
+      <span class="icon-moon">🌙</span>
+    </div>
     <div class="cart-icon" onclick="openCart()">
       <i class="fa-solid fa-shopping-bag"></i>
       <span class="cart-badge" id="cartBadge">0</span>
@@ -1486,6 +1615,28 @@
       document.getElementById('preloader').classList.add('hidden');
     }, 900);
   });
+
+  // THEME TOGGLE
+  function toggleTheme() {
+    const root = document.documentElement;
+    const currentTheme = root.classList.contains('light-mode') ? 'dark' : 'light';
+    
+    if (currentTheme === 'light') {
+      root.classList.add('light-mode');
+      localStorage.setItem('theme', 'light');
+    } else {
+      root.classList.remove('light-mode');
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+
+  // Load saved theme on page load
+  (function() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.documentElement.classList.add('light-mode');
+    }
+  })();
 
   // SLIDER
   let currentSlide = 0;
