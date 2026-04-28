@@ -1,0 +1,118 @@
+<h2>📊 Reportes y Estadísticas</h2>
+
+<div class="row g-3 mb-3">
+  <div class="col-md-3">
+    <div class="card text-white p-3" style="background: linear-gradient(135deg, #1e0018, #130010); border: 1px solid rgba(255,179,0,.13); border-radius: 12px;">
+      <small class="text-muted">Ingresos Hoy</small>
+      <h3 class="mb-0" style="color: var(--accent2)">S/ <span id="ingHoy">0</span></h3>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-white p-3" style="background: linear-gradient(135deg, #1e0018, #130010); border: 1px solid rgba(255,179,0,.13); border-radius: 12px;">
+      <small class="text-muted">Total Pedidos</small>
+      <h3 class="mb-0" style="color: var(--accent2)"><span id="totalPedidos">0</span></h3>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-white p-3" style="background: linear-gradient(135deg, #1e0018, #130010); border: 1px solid rgba(255,179,0,.13); border-radius: 12px;">
+      <small class="text-muted">Ticket Promedio</small>
+      <h3 class="mb-0" style="color: #4dffa0">S/ <span id="ticketProm">0</span></h3>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-white p-3" style="background: linear-gradient(135deg, #1e0018, #130010); border: 1px solid rgba(255,179,0,.13); border-radius: 12px;">
+      <small class="text-muted">Producto Top</small>
+      <h3 class="mb-0 text-primary" style="font-size: 1.2rem; line-height: 1.8;"><span id="productoTop">—</span></h3>
+    </div>
+  </div>
+</div>
+
+<!-- Filtros -->
+<div class="row mb-3">
+  <div class="col-md-4">
+    <input type="text" id="buscarReporte" class="form-control" placeholder="Buscar producto...">
+  </div>
+  <div class="col-md-3">
+    <select id="filtroPeriodo" class="form-control">
+      <option value="hoy">Hoy</option>
+      <option value="semana">Esta Semana</option>
+      <option value="mes">Este Mes</option>
+      <option value="todo">Todo</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <select id="filtroCategoria" class="form-control">
+      <option value="todas">Todas las categorías</option>
+      <option value="brasas">Pollo a la Brasa</option>
+      <option value="broaster">Broaster</option>
+      <option value="mixtos">Mixtos</option>
+      <option value="bebidas">Bebidas</option>
+    </select>
+  </div>
+  <div class="col-md-2 d-flex gap-2">
+    <button class="btn btn-warning w-100" onclick="Reportes.exportToPDF()"><i class="fa fa-file-pdf"></i> PDF</button>
+    <button class="btn btn-outline-warning w-100" onclick="Reportes.exportToCSV(Reportes.getSalesReport())"><i class="fa fa-file-csv"></i> CSV</button>
+  </div>
+</div>
+  <div class="col-md-3">
+    <select id="filtroPeriodo" class="form-control">
+      <option value="hoy">Hoy</option>
+      <option value="semana">Esta Semana</option>
+      <option value="mes">Este Mes</option>
+      <option value="todo">Todo</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <select id="filtroCategoria" class="form-control">
+      <option value="todas">Todas las categorías</option>
+      <option value="brasas">Pollo a la Brasa</option>
+      <option value="broaster">Broaster</option>
+      <option value="mixtos">Mixtos</option>
+      <option value="bebidas">Bebidas</option>
+    </select>
+  </div>
+  <div class="col-md-2 d-flex gap-2">
+    <button class="btn btn-warning w-100" onclick="Reportes.exportToPDF()"><i class="fa fa-file-pdf"></i> PDF</button>
+    <button class="btn btn-outline-warning w-100" onclick="Reportes.exportToCSV(Reportes.getSalesReport())"><i class="fa fa-file-csv"></i> CSV</button>
+  </div>
+</div>
+
+<!-- Gráfico de Barras -->
+<div class="row mb-3">
+  <div class="col-12">
+    <div class="card border-0" style="background: linear-gradient(135deg, #1e0018, #130010); border: 1px solid rgba(255,179,0,.13); border-radius: 12px;">
+      <div class="card-header border-0" style="background: transparent; color: var(--white); font-weight: 700;">
+        <i class="fa fa-chart-column" style="color: var(--accent2)"></i> Ventas por Producto
+      </div>
+      <div class="card-body">
+        <div class="chart-container" id="chartVentas" style="height: 300px; display: flex; align-items: flex-end; justify-content: space-around; padding: 1rem 0; gap: 1rem;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tabla de Detalle -->
+<div class="row">
+  <div class="col-12">
+    <div class="card border-0" style="background: linear-gradient(135deg, #1e0018, #130010); border: 1px solid rgba(255,179,0,.13); border-radius: 12px;">
+      <div class="card-header border-0" style="background: transparent; color: var(--white); font-weight: 700;">
+        <i class="fa fa-list" style="color: var(--accent2)"></i> Detalle de Ventas
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-dark table-hover" style="color: #fff;">
+            <thead style="background: rgba(255,179,0,.1);">
+              <tr>
+                <th>Producto</th>
+                <th class="text-center">Cant.</th>
+                <th class="text-end">Ingresos</th>
+                <th class="text-center">% del Total</th>
+              </tr>
+            </thead>
+            <tbody id="tablaReportes"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

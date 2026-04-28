@@ -85,6 +85,7 @@ function closeSidebar() {
 ═══════════════════════════════════════════════ */
 const VIEW_FILES = {
   dashboard: 'vistas/dashboard.html',
+  reportes:  'vistas/reportes.html',
   venta:     'vistas/venta.html',
   inventario:'vistas/inventario.html',
   caja:      'vistas/caja.html',
@@ -93,6 +94,7 @@ const VIEW_FILES = {
 
 const VIEW_TITLES = {
   dashboard: 'Dashboard',
+  reportes:  'Reportes',
   venta:     'Punto de Venta',
   inventario:'Inventario',
   caja:      'Caja',
@@ -152,6 +154,7 @@ async function loadView(name) {
 
 function refreshView(name) {
   if (name === 'dashboard')  renderDashboard();
+  if (name === 'reportes')   renderReportes();
   if (name === 'inventario') renderInventario();
   if (name === 'caja')       renderCaja();
   if (name === 'finanzas')   renderFinanzas();
@@ -264,8 +267,109 @@ function renderDashboard() {
 }
 
 /* ═══════════════════════════════════════════════
+   REPORTES
+   ═══════════════════════════════════════════════ */
+const productosColores = {
+  'pollo':      ['#e85c00', '#ffb300'],
+  'broaster':   ['#008080', '#00d4aa'],
+  'mixto':      ['#c0001a', '#ff4d88'],
+  'salchi':     ['#d4a017', '#ffce44'],
+  'chaufa':     ['#6a0dad', '#9b59b6'],
+  'caldo':      ['#2e8b57', '#58d68d'],
+  'milanesa':   ['#4a8a00', '#82e022'],
+  'bebida':     ['#0066cc', '#5dade2'],
+};
+
+function getColorCat(nombre) {
+  const n = nombre.toLowerCase();
+  if (n.includes('pollo') || n.includes('bras')) return productosColores.pollo;
+  if (n.includes('broaster')) return productosColores.broaster;
+  if (n.includes('mixto')) return productosColores.mixto;
+  if (n.includes('salchi') || n.includes('pap')) return productosColores.salchi;
+  if (n.includes('chaufa') || n.includes('arroz')) return productosColores.chaufa;
+  if (n.includes('caldo') || n.includes('aguadito')) return productosColores.caldo;
+  if (n.includes('milanesa')) return productosColores.milanesa;
+  if (n.includes('gaseosa') || n.includes('chicha') || n.includes('limon') || n.includes('maracuyá') || n.includes('bebida')) return productosColores.bebida;
+  return ['#888', '#ccc'];
+}
+
+function filtrarReportes() {
+  renderReportes();
+}
+
+function renderReportes() {
+  // Guard: ensure Reportes module is available
+  if (typeof Reportes === 'undefined') {
+    console.error('Reportes module not loaded yet.');
+    return;
+  }
+
+  // Guard: ensure all required DOM elements exist
+  const requiredIds = ['ingHoy','totalPedidos','ticketProm','productoTop','chartVentas','tablaReportes','buscarReporte','filtroPeriodo','filtroCategoria'];
+  for (const id of requiredIds) {
+    if (!document.getElementById(id)) {
+      console.warn('Reportes: missing element #' + id);
+      return;
+    }
+  }
+
+  const ventas = getData('ventas');
+  
+  // Build base report
+  const salesData = Reportes.getSalesReport();
+  
+  // Apply filters
+  let filtered = salesData;
+  const periodo   = document.getElementById('filtroPeriodo').value;
+  const buscar    = document.getElementById('buscarReporte').value.toLowerCase();
+  const categoria = document.getElementById('filtroCategoria').value;
+
+  filtered = Reportes.filterByPeriod(filtered, periodo);
+  filtered = Reportes.filterByCategory(filtered, categoria);
+  filtered = Reportes.filterBySearch(filtered, buscar);
+
+  // Sort by total descending
+  filtered.sort((a,b) => b.total - a.total);
+
+  // Stats
+  const totalGeneral = filtered.reduce((s,f) => s + f.total, 0);
+  const totalCant    = filtered.reduce((s,f) => s + f.cantidad, 0);
+  document.getElementById('ingHoy').textContent       = totalGeneral.toFixed(2);
+  document.getElementById('totalPedidos').textContent = totalCant;
+  document.getElementById('ticketProm').textContent   = totalCant ? (totalGeneral / totalCant).toFixed(2) : '0';
+  document.getElementById('productoTop').textContent  = filtered[0]?.nombre.replace(/[^\u0020-\u007E\u00A0-\u00FF]/g,'').trim().substring(0,12) || '—';
+
+  // — Chart —
+  const chartContainer = document.getElementById('chartVentas');
+  chartContainer.innerHTML = Reportes.generateBarChartHTML(filtered, 6);
+
+  // — Table —
+  const tbody = document.getElementById('tablaReportes');
+  tbody.innerHTML = Reportes.generateTableRowsHTML(filtered);
+
+  // ── Attach filter event listeners (only once)
+  const pane = document.getElementById('view-reportes');
+  if (!pane.dataset.listenersAttached) {
+    const buscarInput = document.getElementById('buscarReporte');
+    const periodoSel  = document.getElementById('filtroPeriodo');
+    const categoriaSel= document.getElementById('filtroCategoria');
+
+    const handler = () => renderReportes();
+    buscarInput?.addEventListener('input', handler);
+    periodoSel?.addEventListener('change', handler);
+    categoriaSel?.addEventListener('change', handler);
+
+    pane.dataset.listenersAttached = 'true';
+  }
+  }
+
+  function exportarPDF() {
+  alert('Función de exportación a PDF próximamente. Puedes usar la opción de impresión (Ctrl+P) como alternativa.');
+}
+
+/* ═══════════════════════════════════════════════
    INVENTARIO
-═══════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════ */
 function renderInventario() {
   const inv = getData('inventario');
   const pane = document.getElementById('view-inventario');

@@ -61,26 +61,29 @@
       <div class="admin-tag"><i class="fa fa-shield-halved"></i> Admin</div>
     </div>
 
-    <nav class="sidebar-nav">
-      <div class="nav-section-label">Principal</div>
-      <div class="nav-item active" onclick="loadView('dashboard')">
-        <i class="fa fa-chart-pie"></i> Dashboard
-      </div>
-      <div class="nav-section-label">Operaciones</div>
-      <div class="nav-item" onclick="loadView('venta')">
-        <i class="fa fa-cash-register"></i> Punto de Venta
-      </div>
-      <div class="nav-item" onclick="loadView('inventario')">
-        <i class="fa fa-boxes-stacked"></i> Inventario
-      </div>
-      <div class="nav-section-label">Finanzas</div>
-      <div class="nav-item" onclick="loadView('caja')">
-        <i class="fa fa-vault"></i> Caja
-      </div>
-      <div class="nav-item" onclick="loadView('finanzas')">
-        <i class="fa fa-file-invoice-dollar"></i> Gastos
-      </div>
-    </nav>
+     <nav class="sidebar-nav">
+       <div class="nav-section-label">Principal</div>
+       <div class="nav-item active" onclick="loadView('dashboard')">
+         <i class="fa fa-chart-pie"></i> Dashboard
+       </div>
+       <div class="nav-item" onclick="loadView('reportes')">
+         <i class="fa fa-chart-line"></i> Reportes
+       </div>
+       <div class="nav-section-label">Operaciones</div>
+       <div class="nav-item" onclick="loadView('venta')">
+         <i class="fa fa-cash-register"></i> Punto de Venta
+       </div>
+       <div class="nav-item" onclick="loadView('inventario')">
+         <i class="fa fa-boxes-stacked"></i> Inventario
+       </div>
+       <div class="nav-section-label">Finanzas</div>
+       <div class="nav-item" onclick="loadView('caja')">
+         <i class="fa fa-vault"></i> Caja
+       </div>
+       <div class="nav-item" onclick="loadView('finanzas')">
+         <i class="fa fa-file-invoice-dollar"></i> Gastos
+       </div>
+     </nav>
 
     <div class="sidebar-footer">
       <div class="user-chip">
@@ -108,14 +111,15 @@
       </div>
     </header>
 
-    <main class="content" id="mainContent">
-      <!-- Views injected here -->
-      <div id="view-dashboard" class="view-pane active"></div>
-      <div id="view-venta"     class="view-pane"></div>
-      <div id="view-inventario" class="view-pane"></div>
-      <div id="view-caja"      class="view-pane"></div>
-      <div id="view-finanzas"  class="view-pane"></div>
-    </main>
+     <main class="content" id="mainContent">
+       <!-- Views injected here -->
+       <div id="view-dashboard" class="view-pane active"></div>
+       <div id="view-reportes"   class="view-pane"></div>
+       <div id="view-venta"     class="view-pane"></div>
+       <div id="view-inventario" class="view-pane"></div>
+       <div id="view-caja"      class="view-pane"></div>
+       <div id="view-finanzas"  class="view-pane"></div>
+     </main>
   </div>
 </div>
 
@@ -222,7 +226,8 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="js/admin.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/reportes.js"></script>
 </body>
 </html>
