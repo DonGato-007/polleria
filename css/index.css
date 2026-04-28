@@ -1059,13 +1059,13 @@
     .footer-bottom a { color: var(--accent2); }
 
     /* ===== WHATSAPP FLOAT ===== */
-    .wa-float {
-      position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
-      width: 58px; height: 58px; background: #25d366; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.8rem; color: #fff; box-shadow: 0 4px 20px rgba(37,211,102,.5);
-      transition: transform .2s; animation: waFloat 2s ease-in-out infinite;
-    }
+     .wa-float {
+       position: fixed; bottom: 2rem; left: 2rem; z-index: 200;
+       width: 58px; height: 58px; background: #25d366; border-radius: 50%;
+       display: flex; align-items: center; justify-content: center;
+       font-size: 1.8rem; color: #fff; box-shadow: 0 4px 20px rgba(37,211,102,.5);
+       transition: transform .2s; animation: waFloat 2s ease-in-out infinite;
+     }
     .wa-float:hover { transform: scale(1.1); }
     @keyframes waFloat {
       0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)}
