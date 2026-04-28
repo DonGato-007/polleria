@@ -1,0 +1,5 @@
+# Coloca aquí las URLs de las imágenes de Google Maps
+# Una URL por línea
+# Ejemplo:
+# https://lh5.googleusercontent.com/p/AF1QipN...=w1200
+
